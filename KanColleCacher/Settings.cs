@@ -21,7 +21,7 @@ namespace d_f_32.KanColleCacher
         public static Settings Current { get; private set; }
 
         /// <summary>
-        /// 加载插件设置
+        /// Load settings
         /// </summary>
         public static void Load()
         {
@@ -51,19 +51,19 @@ namespace d_f_32.KanColleCacher
 				catch (Exception ex)
 				{
 					Current.CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
-					Log.Exception(ex.InnerException, ex, "设置文件中CacheFolder不存在，试图创建时发生异常");
+					Log.Exception(ex.InnerException, ex, "CacheFolder cannot be found, and an error occured during an attempt to create it");
 				}
 			}
 			else
 			{
-				//设置文件丢失
+				//Missing settings file
 			}
 
 			Current = Current ?? new Settings();
         }
         
         /// <summary>
-        /// 保存设置
+        /// Save settings
         /// </summary>
         public static void Save()
         {
@@ -78,7 +78,7 @@ namespace d_f_32.KanColleCacher
             }
             catch (Exception ex)
             {
-				Log.Exception(ex.InnerException, ex, "保存设置文件时出现异常");
+				Log.Exception(ex.InnerException, ex, "An error occured while saving settings");
             }
         }
 
@@ -103,7 +103,7 @@ namespace d_f_32.KanColleCacher
 
 
         private string _CacheFolder;
-		[ExportMetadata("Comment","缓存文件夹")]
+		[ExportMetadata("Comment","Cache Folder Path")]
         public string CacheFolder
         {
             get { return this._CacheFolder; }
@@ -118,7 +118,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _CacheEnabled;
-		[ExportMetadata("Comment", "启用缓存功能")]
+		[ExportMetadata("Comment", "Enable Cache Functions")]
         public bool CacheEnabled
         {
             get { return this._CacheEnabled; }
@@ -133,7 +133,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackEnabled;
-		[ExportMetadata("Comment", "启用Hack规则")]
+		[ExportMetadata("Comment", "Enable Modding")]
 		public bool HackEnabled
         {
             get { return this._HackEnabled; }
@@ -148,7 +148,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackTitleEnabled;
-		[ExportMetadata("Comment", "启用针对TitleCall与WorldName的特殊规则")]
+		[ExportMetadata("Comment", "Enable Special Handling for TitleCall* and WorldName* Files")]
 		public bool HackTitleEnabled
         {
             get { return this._HackTitleEnabled; }
@@ -233,9 +233,9 @@ namespace d_f_32.KanColleCacher
         }
 
 		private int _CheckFiles;
-		[ExportMetadata("Comment", @"向服务器发送文件验证请求
-; 0 - 不验证；1 - 不验证资源SWF文件；2 - 验证所有SWF文件
-; 验证文件可以保证缓存的游戏文件始终是有效可用的，但因为要与服务器通信所以会比不验证花费更长的加载时间")]
+		[ExportMetadata("Comment", @"Cache File Verification Options
+; 0 - No verification；1 - No verification for asset files；2 - Verify all .swf files
+; Verification ensures the integrity of cached files，however the game will load slower as the file data is checked with those hosted on the game servers")]
 		public int CheckFiles
 		{
 			get { return this._CheckFiles; }
@@ -266,7 +266,7 @@ namespace d_f_32.KanColleCacher
 //			}
 //		}
 
-		#region 实现通知
+		#region PropertyChangedNotifications
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
