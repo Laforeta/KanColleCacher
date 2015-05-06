@@ -9,7 +9,7 @@ namespace d_f_32.KanColleCacher
 	public class GMTHelper
 	{
 		/// <summary>  
-		/// 本地时间转成GMT时间  
+		/// Convert local time to GMT (UTC) time  
 		/// </summary>  
 		/// <returns>Thu, 29 Sep 2011 15:04:39 GMT</returns>
 		/// <remarks>ToGMTString(DateTime.Now)</remarks>
@@ -18,7 +18,7 @@ namespace d_f_32.KanColleCacher
 			return dt.ToUniversalTime().ToString("r");
 		}
 
-		#region 未引用的函数
+		#region Unused functions
 		
 		/// <summary>  
 		/// 本地时间转成GMT格式的时间  

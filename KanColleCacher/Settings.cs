@@ -233,7 +233,7 @@ namespace d_f_32.KanColleCacher
         }
 
 		private int _CheckFiles;
-		[ExportMetadata("Comment", @"Cache File Verification Options
+		[ExportMetadata("Comment", @"Update check Options
 ; 0 - No verification；1 - No verification for asset files；2 - Verify all .swf files
 ; Verification ensures the integrity of cached files，however the game will load slower as the file data is checked with those hosted on the game servers")]
 		public int CheckFiles
