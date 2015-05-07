@@ -10,6 +10,7 @@ namespace d_f_32.KanColleCacher
 	{
 		static Dictionary<string, string> record = new Dictionary<string, string>();
 		//KEY: url, Value: filepath
+        //This class TaskRecord is only used following metadata verification before the file is saved to disk or sent to client
 		//只有在验证文件修改时间后，向客户端返回本地文件或者将文件保存到本地时才需要使用
 		
 		static public void Add(string url, string filepath)
@@ -34,7 +35,7 @@ namespace d_f_32.KanColleCacher
 		}
 	}
 
-	#region 废弃的代码
+	#region Deprecated code
 	//static class RecentRecord
 	//{
 	//	class RecordItem

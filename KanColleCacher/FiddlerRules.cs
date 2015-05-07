@@ -11,9 +11,9 @@ namespace d_f_32.KanColleCacher
 {
 	enum Direction
 	{
-		Discharge_Response,		//无关请求，或需要下载文件 -> 忽略请求
-		Return_LocalFile,		//存在无需验证的本地文件 -> 返回本地文件
-		Verify_LocalFile,		//验证文件有效性 -> 向服务器发送验证请求
+		Discharge_Response,		//Local cache file is absent -> Ignore request and send HTTP GET directly to game server
+		Return_LocalFile,		//Local cache file is present -> Return request with files stored locally
+		Verify_LocalFile,		//Local cache file is present but needs to be verified -> Query game server for metadata
 	}
 
     class FiddlerRules
@@ -39,7 +39,7 @@ namespace d_f_32.KanColleCacher
 			return oSession.PathAndQuery.StartsWith("/kcs/");
 		}
 
-        #region     Fiddler向服务器发送客户端请求前执行的动作
+        #region     Fiddler handling of client requests
         //This event fires when a client request is received by Fiddler
         static void _BeforeRequest(Session oSession)
         {
@@ -51,30 +51,30 @@ namespace d_f_32.KanColleCacher
 			
 			if (direction == Direction.Return_LocalFile)
 			{
-				//返回本地文件
+				//Return local files
 				oSession.utilCreateResponseAndBypassServer();
 				oSession.ResponseBody = File.ReadAllBytes(filepath);
 				_CreateResponseHeader(oSession, filepath);
 
-				//Debug.WriteLine("CACHR> 【返回本地】" + filepath);
+				//Debug.WriteLine("CACHR> 【ReturnLocal】" + filepath);
 			}
 			else if (direction == Direction.Verify_LocalFile)
 			{
-				//请求服务器验证文件
+				//Query server for metadata
 				//oSession.oRequest.headers["If-Modified-Since"] = result;
 				oSession.oRequest.headers["If-Modified-Since"] = _GetModifiedTime(filepath);
 				oSession.bBufferResponse = true;
 
-				//Debug.WriteLine("CACHR> 【验证文件】" + oSession.PathAndQuery);
+				//Debug.WriteLine("CACHR> 【FileVerify】" + oSession.PathAndQuery);
 			}
 			else 
 			{ 
-				//下载文件
+				//Do nothing and forward client request to game server
 			}
         }
         #endregion
 
-        #region     Fiddler向客户端返回服务器响应前执行的动作
+        #region     Fiddler handling of server responses
         //This event fires when a server response is received by Fiddler
         static void _BeforeResponse(Session oSession)
         {
@@ -82,10 +82,10 @@ namespace d_f_32.KanColleCacher
 			if (oSession.responseCode == 304)
 			{
 				string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
-				//只有TaskRecord中有记录的文件才是验证的文件，才需要修改Header
+				//Only modify headers for those files mentioned in TaskRecord
 				if (!string.IsNullOrEmpty(filepath))
 				{
-					//服务器返回304，文件没有修改 -> 返回本地文件
+					//If response HTTP 304 is received, then the local file is up to date and can be used 
 					oSession.bBufferResponse = true;
 					oSession.ResponseBody = File.ReadAllBytes(filepath);
 					oSession.oResponse.headers.HTTPResponseCode = 200;
@@ -99,42 +99,42 @@ namespace d_f_32.KanColleCacher
 
 					//Debug.WriteLine(oSession.oResponse.headers.ToString());
 					//Debug.WriteLine("");
-					//Debug.WriteLine("CACHR> 【捕获 304】" + oSession.PathAndQuery);
+					//Debug.WriteLine("CACHR> 【HTTP 304】" + oSession.PathAndQuery);
 					//Debug.WriteLine("		" + filepath);
 				}
 			}
         }
         #endregion
 
-        #region     会话完成时执行的动作
+        #region     Actions before closing a HTTP session
         static void _AfterComplete(Session oSession)
         {
             if (!Settings.Current.CacheEnabled) return;
 			if (!_Filter(oSession)) return;
 
-			//服务器返回200，下载新的文件
+			//Download new files following a HTTP 200 response 
 			if (oSession.responseCode == 200)
 			{
 				string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
 
-				//只有TaskRecord中有记录的文件才是验证的文件，才需要保存
+				//Only write files mentioned in TaskRecord to disk
 				if (!string.IsNullOrEmpty(filepath))
 				{
 					if (File.Exists(filepath))
 						File.Delete(filepath);
 
-					//保存下载文件并记录Modified-Time
+					//Save file in response and write "Last-Modified" Metadata
 					try
 					{
 						oSession.SaveResponseBody(filepath);
 						//cache.RecordNewModifiedTime(oSession.fullUrl,
 						//	oSession.oResponse.headers["Last-Modified"]);
 						_SaveModifiedTime(filepath, oSession.oResponse.headers["Last-Modified"]);
-						//Debug.WriteLine("CACHR> 【下载文件】" + oSession.PathAndQuery);
+						//Debug.WriteLine("CACHR> 【FileDownloaded】" + oSession.PathAndQuery);
 					}
 					catch (Exception ex)
 					{
-						Log.Exception(oSession, ex, "会话结束时，保存返回文件时发生异常");
+						Log.Exception(oSession, ex, "An error occured while writing downloaded file to disk");
 					}
 				}
 			}
@@ -171,7 +171,7 @@ namespace d_f_32.KanColleCacher
 			}
 			catch (Exception ex)
 			{
-				Log.Exception("FiddlerRules", ex, "在保存文件修改时间时发生异常。");
+				Log.Exception("FiddlerRules", ex, "An error occured while saving file metadata");
 			}
 		}
 
@@ -185,12 +185,12 @@ namespace d_f_32.KanColleCacher
 			}
 			catch (Exception ex)
 			{
-				Log.Exception("FiddlerRules", ex, "在保存文件修改时间时发生异常。");
+                Log.Exception("FiddlerRules", ex, "An error occured while saving file metadata");
 				return "";
 			}
 		}
 
-        #region 保留的代码
+        #region Unused code
         //
         //_BeforeResponse = {
         //        oSession.utilDecodeResponse();
