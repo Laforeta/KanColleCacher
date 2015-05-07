@@ -249,7 +249,7 @@
                           Style="{StaticResource CheckFile_SwichCase_StyleKey}">
                 </CheckBox>
 
-                <TextBlock Text="※ Enabling this option ensures that your game files are up to date at the expense of speed." 
+                <TextBlock Text="※ Enabling this option ensures that the saved files are up to date at the expense of speed." 
                            TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
