@@ -15,8 +15,7 @@ In addition, this tool can also be used to change the graphics and sound as they
 Version Support
 -----------------------
 * The latest test release is v2.1.0
-* Tested to be fuly compatible with v3.3 through to v3.6 of the main KCV branch, as well as yuyuvn's KCV v3.7 build r544.
-* It does NOT appear to function properly with pre-3.0 versions of KancolleViewer, avoid this plugin if you are still on an older version of KCV. 
+* Tested to be fully compatible with v3.3 through to v3.6 of the main KCV branch, as well as yuyuvn's KCV v3.7 build r544.
 * Compatibility with future versions of KancolleViewer is not guaranteed as the underlying code base may change. 
 
 
@@ -28,21 +27,41 @@ License
 Installation
 --------------------
 * Copy KancolleCacher.dll to the 'Plugins' folder of your KCV installation
-* (Optional) Right click on KancolleCacher.dll, choose 'Properties', click 'Unblock' and "OK"
+* (Optional but highloy recommended) Right click on KancolleCacher.dll, choose 'Properties', click 'Unblock' and "OK"
 * Launch KanColleViewer
 * The settings for this plugin can be found under the 'Tools' tab
 
-How to use
+Basic Operations
 --------------------
-W.I.P.
 
 
-Known Issues
+Cache File Structure
 --------------------
-1. Changes made to local filed managed by this plugin is not applied to the game until the cache is manually wiped in KCV. This is not a bug but as design constraint as the browser contain in KCV is fully oblivious of packet interception and will try to maintain its own cache. 
+/kcs/portmain.swf
+/kcs/resources/
+/kcs/scenes/
+/kcs/sound/
 
-2. In rare cases, the plugin may cause KCV to freeze when a new file is being written to the disk. The cause of this is not yet defined, however it is very infrequent and easily resolved by restarting KCV.
 
+Modding: Character Sprites
+--------------------
+
+
+Modding: Sound
+--------------------
+
+
+Modding: Welcome Message
+--------------------
+
+
+Troubleshooting and Known Issues
+--------------------
+1. Changes made to local files managed by this plugin is not applied to the game until the cache is manually wiped in KCV. This is not a bug but as design constraint as the browser contained in KCV is oblivious of packet interception and will try to maintain its own cache. 
+
+2. While the plugin attempts to keep every file in cache up to date, cache files are sometimes received in incomplete or corrupted state due to transmission errors. If a particular actions such as sortie to a certain node or selecting a certain ship consistently causes the game to error out, it is possible that some files may have become corrupted. This is unlikely to have long-term consequences as it could happen without this tool. To remedy this, manually delete all cached files under /kcs/ and they will be automatically re-downloaded by the next restart. An improved file verification scheme is planned for a future release to relieve the need for doing this. 
+
+3. In rare cases, the plugin may cause KCV to freeze when ateempting to overwrite a file that needs to be updated. The cause of this is not yet 100% clear, however it is very infrequent and easily resolved by restarting KCV.
 
 Work to do
 --------------------
