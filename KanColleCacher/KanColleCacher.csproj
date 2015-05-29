@@ -65,6 +65,7 @@
     <Compile Include="ConfigParser.cs" />
     <Compile Include="GMTHelper.cs" />
     <Compile Include="GraphList.cs" />
+    <Compile Include="GraphModifier.cs" />
     <Compile Include="ValidationRule.cs" />
     <Compile Include="ValueConverter.cs" />
     <Compile Include="CacheCore.cs" />
