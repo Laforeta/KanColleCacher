@@ -96,7 +96,7 @@ namespace Gizeta.KanColleCacher
 
         private void FiddlerApplication_BeforeResponse(Session oSession)
         {
-            if (oSession.PathAndQuery.StartsWith("/kcsapi/api_start2"))
+            if (oSession.PathAndQuery.StartsWith("/kcsapi/api_start2") && Settings.Current.HackEnabled)
             {
                 jsonData = oSession.GetResponseBodyAsString();
                 ModifyData.Items.ForEach(x => setModifiedData(x));
