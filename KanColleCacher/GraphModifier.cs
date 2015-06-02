@@ -70,13 +70,13 @@ namespace Gizeta.KanColleCacher
                 if(!data.Data.ContainsKey("boko_n_left")) break;
 
                 temp = data.Data[mod + "_left"];
-                if (temp != null)
+                if (temp != null && temp.Length > 0)
                 {
                     graphReplaceStr = Regex.Replace(graphReplaceStr, mod + @""":\[([\d-]+),([\d-]+)\]", mod + @""":[" + temp + @",$2]");
                 }
 
                 temp = data.Data[mod + "_top"];
-                if (temp != null)
+                if (temp != null && temp.Length > 0)
                 {
                     graphReplaceStr = Regex.Replace(graphReplaceStr, mod + @""":\[([\d-]+),([\d-]+)\]", mod + @""":[$1," + temp + @"]");
                 }
