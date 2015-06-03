@@ -89,6 +89,8 @@ namespace Gizeta.KanColleCacher
 
         private void FiddlerApplication_BeforeRequest(Session oSession)
         {
+            if (!set.CacheEnabled) return;
+
             if (oSession.PathAndQuery.StartsWith("/kcsapi/api_start2"))
             {
                 oSession.bBufferResponse = true;
@@ -97,6 +99,8 @@ namespace Gizeta.KanColleCacher
 
         private void FiddlerApplication_BeforeResponse(Session oSession)
         {
+            if (!set.CacheEnabled) return;
+
             if (oSession.PathAndQuery.StartsWith("/kcsapi/api_start2") && Settings.Current.HackEnabled)
             {
                 jsonData = oSession.GetResponseBodyAsString();

@@ -19,7 +19,6 @@ namespace Gizeta.KanColleCacher
         public void Initialize()
         {
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
-            FiddlerApplication.BeforeResponse += FiddlerApplication_BeforeResponse;
 
             KanColleClient.Current.Proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => fcoin = x.Data.api_fcoin);
         }
@@ -27,21 +26,18 @@ namespace Gizeta.KanColleCacher
         public void Dispose()
         {
             FiddlerApplication.BeforeRequest -= FiddlerApplication_BeforeRequest;
-            FiddlerApplication.BeforeResponse -= FiddlerApplication_BeforeResponse;
         }
 
         private void FiddlerApplication_BeforeRequest(Session oSession)
         {
+            if (!set.CacheEnabled) return;
+
             if (oSession.PathAndQuery.StartsWith("/kcsapi/api_req_furniture/music_play") && set.HackMusicRequestEnabled)
             {
                 oSession.utilCreateResponseAndBypassServer();
                 oSession.oResponse.headers.Add("Content-Type", "text/plain");
                 oSession.utilSetResponseBody(@"svdata={""api_result"":1,""api_result_msg"":""\u6210\u529f"",""api_data"":{""api_coin"":" + fcoin.ToString() + @"}}");
             }
-        }
-
-        private void FiddlerApplication_BeforeResponse(Session oSession)
-        {
         }
     }
 }
