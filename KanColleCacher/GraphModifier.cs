@@ -64,7 +64,8 @@ namespace Gizeta.KanColleCacher
                                          "map_n", "map_d",
                                          "ensyuf_n", "ensyuf_d",
                                          "ensyue_n",
-                                         "battle_n", "battle_d" };
+                                         "battle_n", "battle_d",
+                                         "weda", "wedb" };
             foreach (var mod in modList)
             {
                 if(!data.Data.ContainsKey("boko_n_left")) break;
@@ -136,7 +137,8 @@ namespace Gizeta.KanColleCacher
                                              "map_n", "map_d",
                                              "ensyuf_n", "ensyuf_d",
                                              "ensyue_n",
-                                             "battle_n", "battle_d" };
+                                             "battle_n", "battle_d",
+                                             "weda", "wedb" };
                 foreach (var mod in modList)
                 {
                     this.Data.Add(mod + "_left", parser["graph"][mod + "_left"]);
