@@ -9,6 +9,7 @@ namespace Gizeta.KanColleCacher
 {
     public class GraphModifier
     {
+        private Settings set = Settings.Current;
         private string jsonData = "";
 
         public GraphModifier()
@@ -26,7 +27,7 @@ namespace Gizeta.KanColleCacher
             {
                 foreach (var file in folder.GetFiles())
                 {
-                    if (file.FullName.EndsWith(".config.ini"))
+                    if (file.Name.EndsWith(".config.ini"))
                     {
                         ModifyData.Items.Add(new ModifyData(file.FullName));
                     }
