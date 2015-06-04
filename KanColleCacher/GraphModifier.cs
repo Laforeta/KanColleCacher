@@ -54,7 +54,7 @@ namespace Gizeta.KanColleCacher
             var infoReplaceStr = infoStr;
 
             var temp = data.Data["ship_name"];
-            if (temp != null)
+            if (temp != null && temp.Length > 0)
             {
                 infoReplaceStr = Regex.Replace(infoReplaceStr, @"api_name"":""(.+?)""", @"api_name"":""" + temp + @"""");
             }
