@@ -51,7 +51,7 @@ namespace d_f_32.KanColleCacher
 				catch (Exception ex)
 				{
 					Current.CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
-					Log.Exception(ex.InnerException, ex, "设置文件中CacheFolder不存在，试图创建时发生异常");
+                    Log.Exception(ex.InnerException, ex, "CacheFolder cannot be found, and an error occured during an attempt to create it");
 				}
 			}
 			else
@@ -103,7 +103,7 @@ namespace d_f_32.KanColleCacher
             }
             catch (Exception ex)
             {
-				Log.Exception(ex.InnerException, ex, "保存设置文件时出现异常");
+                Log.Exception(ex.InnerException, ex, "An error occured while saving settings");
             }
         }
 
@@ -130,7 +130,7 @@ namespace d_f_32.KanColleCacher
 
 
         private string _CacheFolder;
-		[ExportMetadata("Comment","缓存文件夹")]
+        [ExportMetadata("Comment", "File Storage Path")]
         public string CacheFolder
         {
             get { return this._CacheFolder; }
@@ -145,7 +145,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _CacheEnabled;
-		[ExportMetadata("Comment", "启用缓存功能")]
+        [ExportMetadata("Comment", "Enable Cache Manager")]
         public bool CacheEnabled
         {
             get { return this._CacheEnabled; }
@@ -160,7 +160,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackEnabled;
-		[ExportMetadata("Comment", "启用Hack规则")]
+        [ExportMetadata("Comment", "Enable Mods")]
 		public bool HackEnabled
         {
             get { return this._HackEnabled; }
@@ -175,7 +175,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackTitleEnabled;
-		[ExportMetadata("Comment", "启用针对TitleCall与WorldName的特殊规则")]
+        [ExportMetadata("Comment", "Enable Special Handling for Modding TitleCall* and WorldName* Files")]
 		public bool HackTitleEnabled
         {
             get { return this._HackTitleEnabled; }
@@ -190,7 +190,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackBookEnabled;
-		[ExportMetadata("Comment", "启用全图鉴功能")]
+		[ExportMetadata("Comment", "Unlock All Ship Cards")]
 		public bool HackBookEnabled
         {
             get { return this._HackBookEnabled; }
@@ -205,7 +205,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackMusicRequestEnabled;
-		[ExportMetadata("Comment", "启用针对点唱机api请求的特殊规则")]
+		[ExportMetadata("Comment", "Enable Special Handling for Jukebox API requests")]
 		public bool HackMusicRequestEnabled
         {
             get { return this._HackMusicRequestEnabled; }
@@ -290,9 +290,9 @@ namespace d_f_32.KanColleCacher
         }
 
 		private int _CheckFiles;
-		[ExportMetadata("Comment", @"向服务器发送文件验证请求
-; 0 - 不验证；1 - 不验证资源SWF文件；2 - 验证所有SWF文件
-; 验证文件可以保证缓存的游戏文件始终是有效可用的，但因为要与服务器通信所以会比不验证花费更长的加载时间")]
+        [ExportMetadata("Comment", @"File Verification Options
+; 0 - No Verification；1 - Verification except for files under kcs/flash/resource；2 - Verify all .swf files
+; Verification ensures the locally stored files are the latest versions, however it may cause slight lags")]
 		public int CheckFiles
 		{
 			get { return this._CheckFiles; }
