@@ -44,14 +44,14 @@ namespace d_f_32.KanColleCacher
 	{
 
 		public const string Name = "KanColleCacher";
-		public const string Version = "2.1.0.25";
+		public const string Version = "2.1.0.26";
 		public const string Author = "d.f.32";
 		public const string Copyright = "©2014 - d.f.32";
 #if DEBUG
-		public const string Title = "提督很忙！缓存工具 (DEBUG)";
+		public const string Title = "KancolleCacher (Debug)";
 #else
-		public const string Title = "提督很忙！缓存工具";
+		public const string Title = "KancolleCacher";
 #endif
-		public const string Description = "通过创建本地缓存以加快游戏加载速度（并支持魔改）";
+		public const string Description = "Make Kancolle smoother with persistent cache";
 	}
 }
