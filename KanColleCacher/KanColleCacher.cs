@@ -12,7 +12,7 @@ namespace d_f_32.KanColleCacher
 	[ExportMetadata("Author", AssemblyInfo.Author)]
 	public class KanColleCacher : IToolPlugin
     {
-		const string name = "缓存工具";
+		const string name = "Cache Manager";
 		static bool isInitialized = false;
 		static CacherToolView view;
 

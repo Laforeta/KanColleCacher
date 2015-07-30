@@ -224,17 +224,17 @@
                           ToolTip="Files are downloaded to load the game before 'Game Start' is pressed. Do not modify these files as changes may break game functionalities."
                           IsChecked="{Binding Current.CacheEntryFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                    <CheckBox Content="UI Files"
+                    <CheckBox Content="Port Interface"
                           ToolTip="Game interface files while at port. Do not modify these files as changes may break game functionalities."
                           IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                    <CheckBox Content="Scene Files"
+                    <CheckBox Content="Scene"
                           ToolTip="UI Sub-structure such as factory, supply and item shop pages. Does not include in-game maps."
                           IsChecked="{Binding Current.CacheSceneFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                    <CheckBox Content="Resource Files"
+                    <CheckBox Content="Resource"
                           ToolTip="In game graphic assets including character and furniture sprites and other images in png format. Maps and background music are also cached under this category." 
                           IsChecked="{Binding Current.CacheResourceFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                    <CheckBox Content="Sound Files"
+                    <CheckBox Content="Sound"
                           ToolTip="Voice and SFX in 128kbps MP3 format. Background music is cached separately with the Resource Files."
                           IsChecked="{Binding Current.CacheSoundFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
             </StackPanel>
@@ -251,7 +251,7 @@
                           Style="{StaticResource CheckFile_SwichCase_StyleKey}">
                 </CheckBox>
 
-                <TextBlock Text="※ Enabling this option ensures that the saved files are up to date at the expense of slightly increasing loading time." 
+                <TextBlock Text="※ Makes sure that local files are up to date at the expense of slightly increased loading time." 
                            TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
@@ -261,7 +261,7 @@
 
             <!--第三区块-->
             <StackPanel Grid.Row="2">
-                <CheckBox Content="Enable Modding by .hack Rules" 
+                <CheckBox Content="Enable Resource Modding by .hack Rules" 
                           Margin="10,10,0,0" 
                           IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                           IsChecked="{Binding Current.HackEnabled, Mode=TwoWay}"/>
@@ -281,9 +281,9 @@
             <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ Allow modding of welcome voice messages in「%CacheFolder%\kcs\sound\titlecall\」"/>
+                <Run Text="※ Replaces welcome voice messages in「%CacheFolder%\kcs\sound\titlecall\」"/>
                 <LineBreak/>
-                <Run Text="　 Or replace the server name in「%CacheFolder%\kcs\resources\image\world.png」"/>
+                <Run Text="　  and the server name in「%CacheFolder%\kcs\resources\image\world.png」"/>
             </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -291,14 +291,14 @@
 
             <!--第五区块-->
             <StackPanel Grid.Row="4">
-                <CheckBox Content="Unlock all ship cards" 
+                <CheckBox Content="Unlock All Ship Cards" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackBookEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ Unlock and show all ship and equipment cards in the library"/>
+                <Run Text="※ Show all ship and equipment cards in the library even if you don't have them yet"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -306,14 +306,14 @@
 
             <!--第六区块-->
             <StackPanel Grid.Row="5">
-                <CheckBox Content="Free Jukebox" 
+                <CheckBox Content="Perpetual Motion Jukebox" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackMusicRequestEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ Change BGM freely without costing furniture coins"/>
+                <Run Text="※ Jukebox no longer costs furniture coins to use"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -325,17 +325,13 @@
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ Sprite and voice files for each character is stored using a unique file name"/>
+                    <Run Text="※ Each unique character is now identified as a random text string defined in api_start"/>
                     <LineBreak/>
-                    <Run Text="　 The file names appears to be fixed, however it is possible that they will change after an update"/>
+                    <Run Text="　  For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
                     <LineBreak/>
-                    <Run Text="　 For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
+                    <Run Text="　  her sprite file would be「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」,"/>
                     <LineBreak/>
-                    <Run Text="　 her sprite file would be「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」,"/>
-                    <LineBreak/>
-                    <Run Text="　 and her voice files are located under「kcs\sound\kcuuqdlbtrkmvk\」."/>
-                    <LineBreak/>
-                    <Run Text="　 To generate the current list of sprite files, click the button below:"/>
+                    <Run Text="　  and her voice files are located under「kcs\sound\kcuuqdlbtrkmvk\」."/>
                 </TextBlock>
                 <Button Margin="30,10,0,0"
                         Padding="10,3"
