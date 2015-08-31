@@ -11,6 +11,8 @@ using System.IO;
 using Debug = System.Diagnostics.Debug;
 using System.Runtime.Serialization.Json;
 using System.Windows;
+using Nekoxy;
+using Session = Fiddler.Session;
 
 
 namespace d_f_32.KanColleCacher
@@ -132,7 +134,7 @@ namespace d_f_32.KanColleCacher
 		static void ParseSession(Session oSession)
 		{
 			SvData<kcsapi_start2> svd;
-			if (!SvData.TryParse(oSession, out svd))
+			if (!SvData.TryParse(oSession.ToNekoxySession(), out svd))
 			{
 				Log.Warning("GraphList.ParseSession()", "TryParse失败，无效的Session对象！");
 				return;

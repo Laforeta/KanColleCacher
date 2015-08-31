@@ -160,10 +160,6 @@ namespace Gizeta.KanColleCacher
                 [DataMember]
                 public int api_stype;
                 [DataMember]
-                public int api_ctype;
-                [DataMember]
-                public int api_cnum;
-                [DataMember]
                 public int api_taik;
                 [DataMember]
                 public int api_souk;
@@ -190,8 +186,6 @@ namespace Gizeta.KanColleCacher
                     this.api_name = ship.api_name;
                     this.api_yomi = ship.api_yomi;
                     this.api_stype = ship.api_stype;
-                    this.api_ctype = ship.api_ctype;
-                    this.api_cnum = ship.api_cnum;
                     this.api_taik = ship.api_taik[0];
                     this.api_souk = ship.api_souk[0];
                     this.api_houg = ship.api_houg[0];
