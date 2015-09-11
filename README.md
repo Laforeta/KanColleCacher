@@ -42,8 +42,8 @@ KanColleCacher会在客户端向服务器请求文件之前，检查插件保存
 
 版本与支持
 -----------------------
-* 目前KanColleCacher.dll为v2.1.0，
-* 支持KanColleViewer v3.3\v3.4\v3.6，
+* 目前KanColleCacher.dll为v2.2.1，
+* 支持KanColleViewer v3.3 - v3.8.2，
 * 理论上不支持3.0以前的KCV，
 * 不确定是否支持其他版本的KCV。
 
