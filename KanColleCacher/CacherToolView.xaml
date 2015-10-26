@@ -133,13 +133,13 @@
             <Setter Property="Background" Value="Azure"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="ToolTip" Value="对所有SWF文件进行更新检查"/>
+                    <Setter Property="ToolTip" Value="Enable File Verification"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="False">
-                    <Setter Property="ToolTip" Value="对任何文件都不进行更新检查"/>
+                    <Setter Property="ToolTip" Value="No File Verification"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="ToolTip" Value="仅对资源文件外的SWF文件进行更新检查"/>
+                    <Setter Property="ToolTip" Value="Verify non-Resource Files only"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -166,7 +166,7 @@
             <StackPanel>
                 
             <CheckBox x:Name="CheckBox_CacheEnabled" 
-                      Content="启用缓存"  
+                      Content="Enable Cache Manager"  
                       IsChecked="{Binding Current.CacheEnabled, Mode=TwoWay}"/>
                 <Grid Margin="30,10,30,0" >
                     <Grid.ColumnDefinitions>
@@ -174,7 +174,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="缓存文件夹" VerticalAlignment="Center"/>
+                    <TextBlock Text="Local File Path" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" TextWrapping="Wrap" 
                                 Margin="20,0"
                                 Background="#FF464646" 
@@ -196,14 +196,14 @@
                             IsEnabled="{Binding IsChecked,ElementName=CheckBox_CacheEnabled}"
                             Click="SelectCacheFolder_Click"/>
                 </Grid>
-                <TextBlock Text="※ 游戏缓存将会以「缓存文件夹\kcs\resources\」的结构保存到这里。重启KCV后生效。" 
+                <TextBlock Text="※ Please restart KancolleViewer after changing storage settings." 
                        Margin="30,10,0,0" 
                        Style="{StaticResource DetailTextBlock}"/>
 
             <!--第1.5区块-->
 
             <TextBlock Margin="30,10,0,0"
-                       Text="缓存以下分类的文件：" 
+                       Text="Cache the selected file types locally:" 
                        Style="{StaticResource DetailTextBlock}"/>
             <StackPanel Margin="30,10,0,0"
                         Orientation="Horizontal">
@@ -220,22 +220,22 @@
                             </Style.Triggers>
                     </Style>
                 </StackPanel.Resources>
-                <CheckBox Content="载入文件"
-                          ToolTip="在GameStart按钮之前载入的文件，这部分文件可能会时常更新"
+                    <CheckBox Content="Game Loader"
+                          ToolTip="Files are downloaded to load the game before 'Game Start' is pressed. Do not modify these files as changes may break game functionalities."
                           IsChecked="{Binding Current.CacheEntryFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                <CheckBox Content="界面文件"
-                          ToolTip="母港界面的文件，这部分文件同样可能会更新"
+                    <CheckBox Content="Port Interface"
+                          ToolTip="Game interface files while at port. Do not modify these files as changes may break game functionalities."
                           IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                <CheckBox Content="场景文件"
-                          ToolTip="编成、工厂、商店等界面，不包括地图"
+                    <CheckBox Content="Scene"
+                          ToolTip="UI Sub-structure such as factory, supply and item shop pages. Does not include in-game maps."
                           IsChecked="{Binding Current.CacheSceneFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                <CheckBox Content="资源文件"
-                          ToolTip="包括立绘、地图、BGM以及各种png图片" 
+                    <CheckBox Content="Resource"
+                          ToolTip="In game graphic assets including character and furniture sprites and other images in png format. Maps and background music are also cached under this category." 
                           IsChecked="{Binding Current.CacheResourceFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                <CheckBox Content="声音文件"
-                          ToolTip="主要是舰娘的语音，不包括背景音乐"
+                    <CheckBox Content="Sound"
+                          ToolTip="Voice and SFX in 128kbps MP3 format. Background music is cached separately with the Resource Files."
                           IsChecked="{Binding Current.CacheSoundFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
             </StackPanel>
             <Border Style="{StaticResource BorderStyle}" />
@@ -244,14 +244,14 @@
             <!--第二区块-->
             <StackPanel Grid.Row="1">
                 <CheckBox Margin="10,10,0,0"
-                          Content="检查文件更新" 
+                          Content="Automatically Query Server for Updates" 
                           IsThreeState="True"
                           IsChecked="{Binding Current.CheckFiles,Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled, Mode=TwoWay}" 
                           Style="{StaticResource CheckFile_SwichCase_StyleKey}">
                 </CheckBox>
 
-                <TextBlock Text="※ 检查更新可以保证缓存的游戏文件始终是有效可用的，但这会花费一些加载时间。" 
+                <TextBlock Text="※ Always query game server for new files and update if found." 
                            TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
@@ -261,11 +261,11 @@
 
             <!--第三区块-->
             <StackPanel Grid.Row="2">
-                <CheckBox Content="启用Hack规则" 
+                <CheckBox Content="Enable Resource Modding by .hack Rules" 
                           Margin="10,10,0,0" 
                           IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                           IsChecked="{Binding Current.HackEnabled, Mode=TwoWay}"/>
-                <TextBlock Text="※ 例如：当缓存中同时存在101r.swf与101r.hack.swf时，优先使用后者而非前者" 
+                <TextBlock Text="※ e.g. If 101r.swf and 101r.hack.swf are both present, the latter is use in preference" 
                            Margin="31,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
                 <Border Style="{StaticResource BorderStyle}" />
@@ -274,16 +274,16 @@
 
             <!--第四区块-->
             <StackPanel Grid.Row="3">
-            <CheckBox Content="替换登陆语音与服务器文字" 
+                <CheckBox Content="Enable Modding of Welcome Messages" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackTitleEnabled, Mode=TwoWay}"/>
             <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 允许将游戏登陆语音替换为「缓存文件夹\kcs\sound\titlecall\a.mp3, b.mp3, c.mp3」"/>
+                <Run Text="※ Replaces welcome voice messages in「%CacheFolder%\kcs\sound\titlecall\」"/>
                 <LineBreak/>
-                <Run Text="　 并替换服务器文字为「缓存文件夹\kcs\resources\image\world.png」"/>
+                <Run Text="　  and the server name in「%CacheFolder%\kcs\resources\image\world.png」"/>
             </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -291,14 +291,14 @@
 
             <!--第五区块-->
             <StackPanel Grid.Row="4">
-                <CheckBox Content="开启全图鉴" 
+                <CheckBox Content="Unlock All Ship Cards" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackBookEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 解锁全部舰娘与装备图鉴内容（包括结婚）"/>
+                <Run Text="※ Show all ship and equipment cards in the library even if you don't have them yet"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -306,14 +306,14 @@
 
             <!--第六区块-->
             <StackPanel Grid.Row="5">
-                <CheckBox Content="免费点唱机" 
+                <CheckBox Content="Perpetual Motion Jukebox" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackMusicRequestEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 点唱机点歌将不会消耗家具币"/>
+                <Run Text="※ Jukebox no longer costs furniture coins to use"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -321,23 +321,23 @@
 
             <!--第七区块-->
             <StackPanel Grid.Row="6">
-                <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
+                <Label Content="Generate a List of Sprite Files" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ 每一个舰娘都有对应的文件名。例如，加贺改的文件名为 uuqdlbtrkmvk，"/>
+                    <Run Text="※ Each unique character is now identified as a random text string defined in api_start"/>
                     <LineBreak/>
-                    <Run Text="　 立绘文件为「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」，"/>
+                    <Run Text="　  For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
                     <LineBreak/>
-                    <Run Text="　 语音文件为「kcs\sound\kcuuqdlbtrkmvk\1.mp3」等。"/>
+                    <Run Text="　  her sprite file would be「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」,"/>
                     <LineBreak/>
-                    <Run Text="　 点击下面的按钮以在缓存文件夹中生成一个包含所有舰娘文件名的TXT文档。"/>
+                    <Run Text="　  and her voice files are located under「kcs\sound\kcuuqdlbtrkmvk\」."/>
                 </TextBlock>
                 <Button Margin="30,10,0,0"
                         Padding="10,3"
                         HorizontalAlignment="Left"
                         IsEnabled="{Binding IsChecked, ElementName=CheckBox_SaveApiStart2}"
-                        Content="生成舰娘文件名列表"
+                        Content="Generate Sprite File List"
                         Click="GenerateFileList_Click"/>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -345,22 +345,22 @@
 
             <!--第八区块-->
             <StackPanel Grid.Row="7">
-                <Label Content="清除缓存" Margin="10,10,0,0" Padding="0" Foreground="White"/>
+                <Label Content="Clear Local Files" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ 清除魔改缓存将只会清除符合Hack规则的资源缓存"/>
+                    <Run Text="※ 'Remove All Mods' option will only remove mod files conforming to the .hack rule"/>
                 </TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Margin="30,10,0,0"
                         Padding="10,3"
                         HorizontalAlignment="Left"
-                        Content="清除魔改缓存"
+                        Content="Remove All Mods"
                         Click="CleanModifiedCache_Click"/>
                     <Button Margin="50,10,0,0"
                         Padding="10,3"
                         HorizontalAlignment="Left"
-                        Content="清除全部缓存"
+                        Content="Remove All Files"
                         Click="CleanCache_Click"/>
                 </StackPanel>
                 <Border Style="{StaticResource BorderStyle}" />
