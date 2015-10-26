@@ -5,12 +5,14 @@ using File = System.IO.File;
 
 namespace d_f_32.KanColleCacher
 {
-	[Export(typeof(IToolPlugin))]
-	[ExportMetadata("Title", AssemblyInfo.Name)]
+	[Export(typeof(IPlugin))]
+    [Export(typeof(ITool))]
+    [ExportMetadata("Guid", "DA0FF655-A2CA-40DC-A78B-6DC85C2D448B")]
+    [ExportMetadata("Title", AssemblyInfo.Name)]
 	[ExportMetadata("Description", AssemblyInfo.Description)]
 	[ExportMetadata("Version", AssemblyInfo.Version)]
 	[ExportMetadata("Author", AssemblyInfo.Author)]
-	public class KanColleCacher : IToolPlugin
+	public class KanColleCacher : IPlugin, ITool
     {
 		const string name = "缓存工具";
 		static bool isInitialized = false;
@@ -21,7 +23,7 @@ namespace d_f_32.KanColleCacher
             Initialize();
         }
 
-		static public void Initialize()
+		public void Initialize()
 		{
 			if (isInitialized) return;
 			isInitialized = true;
@@ -57,19 +59,14 @@ CACHR>	初始化开始：{0}
 			Debug.Flush();
 		}
 
-		public string ToolName
+		public string Name
 		{
 			get { return name; }
 		}
 
-		public object GetToolView()
+		public object View
 		{
-			return view;
-		}
-
-		public object GetSettingsView()
-		{
-			return null;
+			get { return view; }
 		}
 	}
 }
