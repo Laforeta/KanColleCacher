@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Fiddler;
 using Debug = System.Diagnostics.Debug;
+using Gizeta.KanColleCacher;
 
 namespace d_f_32.KanColleCacher
 {
@@ -19,11 +20,15 @@ namespace d_f_32.KanColleCacher
     class FiddlerRules
     {
         static CacheCore cache;
+        static GraphModifier modifier;
+        static RespHacker hacker;
 		
 		static public void Initialize ()
 		{
 			cache = new CacheCore();
-			
+			modifier = new GraphModifier();
+            hacker = new RespHacker();
+            
 			_AppendToFiddler();
 		}
 		
@@ -53,7 +58,13 @@ namespace d_f_32.KanColleCacher
 			{
 				//Return local files
 				oSession.utilCreateResponseAndBypassServer();
-				oSession.ResponseBody = File.ReadAllBytes(filepath);
+                byte[] file;
+                using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    file = new byte[fs.Length];
+                    fs.Read(file, 0, (int)fs.Length);
+                }
+                oSession.ResponseBody = file;
 				_CreateResponseHeader(oSession, filepath);
 
 				//Debug.WriteLine("CACHR> 【ReturnLocal】" + filepath);
@@ -87,8 +98,14 @@ namespace d_f_32.KanColleCacher
 				{
 					//If response HTTP 304 is received, then the local file is up to date and can be used 
 					oSession.bBufferResponse = true;
-					oSession.ResponseBody = File.ReadAllBytes(filepath);
-					oSession.oResponse.headers.HTTPResponseCode = 200;
+                    byte[] file;
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        file = new byte[fs.Length];
+                        fs.Read(file, 0, (int)fs.Length);
+                    }
+                    oSession.ResponseBody = file;
+                    oSession.oResponse.headers.HTTPResponseCode = 200;
 					oSession.oResponse.headers.HTTPResponseStatus = "200 OK";
 					oSession.oResponse.headers["Last-Modified"] = oSession.oRequest.headers["If-Modified-Since"];
 					oSession.oResponse.headers["Accept-Ranges"] = "bytes";

@@ -12,9 +12,14 @@ namespace d_f_32.KanColleCacher
 	[ExportMetadata("Author", AssemblyInfo.Author)]
 	public class KanColleCacher : IToolPlugin
     {
-		const string name = "Cache & Mod Manager";
+		const string name = "Cache Manager";
 		static bool isInitialized = false;
 		static CacherToolView view;
+
+        public KanColleCacher()
+        {
+            Initialize();
+        }
 
 		static public void Initialize()
 		{
@@ -65,32 +70,6 @@ CACHR>	初始化开始：{0}
 		public object GetSettingsView()
 		{
 			return null;
-		}
-	}
-
-	[Export(typeof(INotifier))]
-	[ExportMetadata("Title", AssemblyInfo.Name)]
-	[ExportMetadata("Description", AssemblyInfo.Description)]
-	[ExportMetadata("Version", AssemblyInfo.Version)]
-	[ExportMetadata("Author", AssemblyInfo.Author)]
-	public class KanColleCacher_Initializer : INotifier
-	{
-		public void Initialize()
-		{
-			KanColleCacher.Initialize();
-		}
-
-		public void Dispose()
-		{
-		}
-
-		public object GetSettingsView()
-		{
-			return null;
-		}
-
-		public void Show(NotifyType type, string header, string body, System.Action activated, System.Action<System.Exception> failed = null)
-		{
 		}
 	}
 }
