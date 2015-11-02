@@ -166,7 +166,7 @@
             <StackPanel>
                 
             <CheckBox x:Name="CheckBox_CacheEnabled" 
-                      Content="Enable Local Cache"  
+                      Content="Enable Cache Manager"  
                       IsChecked="{Binding Current.CacheEnabled, Mode=TwoWay}"/>
                 <Grid Margin="30,10,30,0" >
                     <Grid.ColumnDefinitions>
@@ -226,14 +226,14 @@
                           IsChecked="{Binding Current.CacheEntryFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
                 <CheckBox Content="UI Files"
-                          ToolTip="Main port UI structure, do not mod these files as they are frequently updated."
+                          ToolTip="Main port UI structure."
                           IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
                 <CheckBox Content="Scene Files"
                           ToolTip="UI Sub-structure such as factory, supply and item shop pages. Does not include in-game maps."
                           IsChecked="{Binding Current.CacheSceneFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
                 <CheckBox Content="Resource Files"
-                          ToolTip="In game graphic assets including character and furniture sprites and other images in png format. Maps and background music are also cached under this category." 
+                          ToolTip="In game graphic assets including sprites, icons, banners, maps, background music and most other images." 
                           IsChecked="{Binding Current.CacheResourceFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
                 <CheckBox Content="Sound Files"
                           ToolTip="In-game voice and sound effect files in 128kbps MP3 format. Background music is cached with the Resource Files. "
@@ -292,14 +292,14 @@
 
             <!--第五区块-->
             <StackPanel Grid.Row="4">
-                <CheckBox Content="开启全图鉴" 
+                <CheckBox Content="Unlock All Ship Cards" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackBookEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 解锁全部舰娘与装备图鉴内容（包括结婚）"/>
+                <Run Text="※ Show all ship and equipment cards in the library even if you don't have them yet"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -307,14 +307,14 @@
 
             <!--第六区块-->
             <StackPanel Grid.Row="5">
-                <CheckBox Content="免费点唱机" 
+                <CheckBox Content="Perpetual Motion Jukebox" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackMusicRequestEnabled, Mode=TwoWay}"/>
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 点唱机点歌将不会消耗家具币"/>
+                <Run Text="※ Jukebox no longer costs furniture coins to use"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -322,13 +322,13 @@
 
             <!--第七区块-->
             <StackPanel Grid.Row="6">
-                <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
+                <Label Content="Generate a List of Sprite Files" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
                     <Run Text="※ Sprite and voice files for each character is stored using a unique file name"/>
                     <LineBreak/>
-                    <Run Text="　 The file names appears to be fixed, however it is possible that they will change after an update"/>
+                    <Run Text="　 The file names can be found in GraphList.txt"/>
                     <LineBreak/>
                     <Run Text="　 For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
                     <LineBreak/>
@@ -350,22 +350,22 @@
 
             <!--第八区块-->
             <StackPanel Grid.Row="7">
-                <Label Content="清除缓存" Margin="10,10,0,0" Padding="0" Foreground="White"/>
+                <Label Content="Clear Local Files" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ 清除魔改缓存将只会清除符合Hack规则的资源缓存"/>
+                    <Run Text="※ 'Remove All Mods' option will only remove mod files conforming to the .hack rule"/>
                 </TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <Button Margin="30,10,0,0"
                         Padding="10,3"
                         HorizontalAlignment="Left"
-                        Content="清除魔改缓存"
+                        Content="Remove All Mods"
                         Click="CleanModifiedCache_Click"/>
                     <Button Margin="50,10,0,0"
                         Padding="10,3"
                         HorizontalAlignment="Left"
-                        Content="清除全部缓存"
+                        Content="Remove All Files"
                         Click="CleanCache_Click"/>
                 </StackPanel>
                 <Border Style="{StaticResource BorderStyle}" />

@@ -118,7 +118,7 @@ namespace d_f_32.KanColleCacher
 
 			try
 			{
-				File.WriteAllText(filepath, content.ToString());
+				File.WriteAllText(filepath, content.ToString(), Encoding.Unicode);
 			}
 			catch (Exception ex)
 			{

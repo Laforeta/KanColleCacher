@@ -51,7 +51,7 @@ namespace d_f_32.KanColleCacher
 				catch (Exception ex)
 				{
 					Current.CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
-					Log.Exception(ex.InnerException, ex, "CacheFolder cannot be found, and an error occured during an attempt to create it");
+                    Log.Exception(ex.InnerException, ex, "Cannot find or create MyCache folder");
 				}
 			}
 			else
@@ -103,7 +103,7 @@ namespace d_f_32.KanColleCacher
             }
             catch (Exception ex)
             {
-				Log.Exception(ex.InnerException, ex, "An error occured while saving settings");
+				Log.Exception(ex.InnerException, ex, "An error has occured whilst saving settings");
             }
         }
 
@@ -145,7 +145,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _CacheEnabled;
-		[ExportMetadata("Comment", "Enable Cache Functions")]
+        [ExportMetadata("Comment", "Enable Cache Manager")]
         public bool CacheEnabled
         {
             get { return this._CacheEnabled; }
@@ -160,7 +160,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackEnabled;
-		[ExportMetadata("Comment", "Enable Modding")]
+		[ExportMetadata("Comment", "Enable Mods")]
 		public bool HackEnabled
         {
             get { return this._HackEnabled; }
@@ -175,7 +175,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackTitleEnabled;
-		[ExportMetadata("Comment", "Enable Special Handling for TitleCall* and WorldName* Files")]
+        [ExportMetadata("Comment", "Enable Modding TitleCall* and WorldName* Files")]
 		public bool HackTitleEnabled
         {
             get { return this._HackTitleEnabled; }
@@ -190,7 +190,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackBookEnabled;
-		[ExportMetadata("Comment", "启用全图鉴功能")]
+		[ExportMetadata("Comment", "Unlock All Ship Cards")]
 		public bool HackBookEnabled
         {
             get { return this._HackBookEnabled; }
@@ -205,7 +205,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackMusicRequestEnabled;
-		[ExportMetadata("Comment", "启用针对点唱机api请求的特殊规则")]
+		[ExportMetadata("Comment", "Enable Special Handling for Jukebox API requests")]
 		public bool HackMusicRequestEnabled
         {
             get { return this._HackMusicRequestEnabled; }
@@ -291,8 +291,8 @@ namespace d_f_32.KanColleCacher
 
 		private int _CheckFiles;
 		[ExportMetadata("Comment", @"Update check Options
-; 0 - No verification；1 - No verification for Resource Files；2 - Verify all .swf files
-; Verification ensures the locally stored files are up to date, however it takes additional time to query and verify metadata")]
+; 0 - No check；1 - Don't check resource files；2 - Check for all .swf files
+; If enabled, aache manager will verify that the local copy is the latest version available")]
 		public int CheckFiles
 		{
 			get { return this._CheckFiles; }
