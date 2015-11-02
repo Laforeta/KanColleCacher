@@ -305,6 +305,7 @@ namespace d_f_32.KanColleCacher
 		public int ship_graph_sortno = 0;
 		public string ship_filename = "";
 		public string ship_version = "";
+
         public int ship_graph_boko_n_left = 0;
         public int ship_graph_boko_n_top = 0;
         public int ship_graph_boko_d_left = 0;

@@ -21,7 +21,7 @@ namespace d_f_32.KanColleCacher
         public static Settings Current { get; private set; }
 
         /// <summary>
-        /// 加载插件设置
+        /// Load settings
         /// </summary>
         public static void Load()
         {
@@ -51,7 +51,7 @@ namespace d_f_32.KanColleCacher
 				catch (Exception ex)
 				{
 					Current.CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
-                    Log.Exception(ex.InnerException, ex, "CacheFolder cannot be found, and an error occured during an attempt to create it");
+                    Log.Exception(ex.InnerException, ex, "Cannot find or create MyCache folder");
 				}
 			}
 			else
@@ -88,7 +88,7 @@ namespace d_f_32.KanColleCacher
         }
         
         /// <summary>
-        /// 保存设置
+        /// Save settings
         /// </summary>
         public static void Save()
         {
@@ -103,7 +103,7 @@ namespace d_f_32.KanColleCacher
             }
             catch (Exception ex)
             {
-                Log.Exception(ex.InnerException, ex, "An error occured while saving settings");
+				Log.Exception(ex.InnerException, ex, "An error has occured whilst saving settings");
             }
         }
 
@@ -130,7 +130,7 @@ namespace d_f_32.KanColleCacher
 
 
         private string _CacheFolder;
-        [ExportMetadata("Comment", "File Storage Path")]
+		[ExportMetadata("Comment","Cache Folder Path")]
         public string CacheFolder
         {
             get { return this._CacheFolder; }
@@ -160,7 +160,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackEnabled;
-        [ExportMetadata("Comment", "Enable Mods")]
+		[ExportMetadata("Comment", "Enable Mods")]
 		public bool HackEnabled
         {
             get { return this._HackEnabled; }
@@ -175,7 +175,7 @@ namespace d_f_32.KanColleCacher
         }
 
         private bool _HackTitleEnabled;
-        [ExportMetadata("Comment", "Enable Special Handling for Modding TitleCall* and WorldName* Files")]
+        [ExportMetadata("Comment", "Enable Modding TitleCall* and WorldName* Files")]
 		public bool HackTitleEnabled
         {
             get { return this._HackTitleEnabled; }
@@ -290,9 +290,9 @@ namespace d_f_32.KanColleCacher
         }
 
 		private int _CheckFiles;
-        [ExportMetadata("Comment", @"File Verification Options
-; 0 - No Verification；1 - Verification except for files under kcs/flash/resource；2 - Verify all .swf files
-; Verification ensures the locally stored files are the latest versions, however it may cause slight lags")]
+		[ExportMetadata("Comment", @"Update check Options
+; 0 - No check；1 - Don't check resource files；2 - Check for all .swf files
+; If enabled, aache manager will verify that the local copy is the latest version available")]
 		public int CheckFiles
 		{
 			get { return this._CheckFiles; }
@@ -323,7 +323,7 @@ namespace d_f_32.KanColleCacher
 //			}
 //		}
 
-		#region 实现通知
+		#region PropertyChangedNotifications
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

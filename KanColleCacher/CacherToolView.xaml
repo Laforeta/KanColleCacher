@@ -133,13 +133,13 @@
             <Setter Property="Background" Value="Azure"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="ToolTip" Value="Enable File Verification"/>
+                    <Setter Property="ToolTip" Value="Check updates for all files"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="False">
-                    <Setter Property="ToolTip" Value="No File Verification"/>
+                    <Setter Property="ToolTip" Value="No update checks"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="ToolTip" Value="Verify non-Resource Files only"/>
+                    <Setter Property="ToolTip" Value="Check updates for all files, except the .swf files in \kcs\resources\"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -174,7 +174,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Local File Path" VerticalAlignment="Center"/>
+                    <TextBlock Text="Cache Folder Path" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" TextWrapping="Wrap" 
                                 Margin="20,0"
                                 Background="#FF464646" 
@@ -196,14 +196,15 @@
                             IsEnabled="{Binding IsChecked,ElementName=CheckBox_CacheEnabled}"
                             Click="SelectCacheFolder_Click"/>
                 </Grid>
-                <TextBlock Text="※ Please restart KancolleViewer after changing storage settings." 
+                <TextBlock Text="※ Please restart KancolleViewer after changing the cache location." 
                        Margin="30,10,0,0" 
                        Style="{StaticResource DetailTextBlock}"/>
 
-            <!--第1.5区块-->
+
+                <!--第1.5区块-->
 
             <TextBlock Margin="30,10,0,0"
-                       Text="Cache the selected file types locally:" 
+                       Text="Cache the selected file types" 
                        Style="{StaticResource DetailTextBlock}"/>
             <StackPanel Margin="30,10,0,0"
                         Orientation="Horizontal">
@@ -220,22 +221,22 @@
                             </Style.Triggers>
                     </Style>
                 </StackPanel.Resources>
-                    <CheckBox Content="Game Loader"
-                          ToolTip="Files are downloaded to load the game before 'Game Start' is pressed. Do not modify these files as changes may break game functionalities."
+                <CheckBox Content="Game Loader"
+                          ToolTip="Files are downloaded to load the game before 'Game Start' is pressed. Do not mod these files as they are frequently updated."
                           IsChecked="{Binding Current.CacheEntryFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                    <CheckBox Content="Port Interface"
-                          ToolTip="Game interface files while at port. Do not modify these files as changes may break game functionalities."
+                <CheckBox Content="UI Files"
+                          ToolTip="Main port UI structure."
                           IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                    <CheckBox Content="Scene"
+                <CheckBox Content="Scene Files"
                           ToolTip="UI Sub-structure such as factory, supply and item shop pages. Does not include in-game maps."
                           IsChecked="{Binding Current.CacheSceneFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                    <CheckBox Content="Resource"
-                          ToolTip="In game graphic assets including character and furniture sprites and other images in png format. Maps and background music are also cached under this category." 
+                <CheckBox Content="Resource Files"
+                          ToolTip="In game graphic assets including sprites, icons, banners, maps, background music and most other images." 
                           IsChecked="{Binding Current.CacheResourceFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
-                    <CheckBox Content="Sound"
-                          ToolTip="Voice and SFX in 128kbps MP3 format. Background music is cached separately with the Resource Files."
+                <CheckBox Content="Sound Files"
+                          ToolTip="In-game voice and sound effect files in 128kbps MP3 format. Background music is cached with the Resource Files. "
                           IsChecked="{Binding Current.CacheSoundFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
             </StackPanel>
             <Border Style="{StaticResource BorderStyle}" />
@@ -251,7 +252,7 @@
                           Style="{StaticResource CheckFile_SwichCase_StyleKey}">
                 </CheckBox>
 
-                <TextBlock Text="※ Makes sure that local files are up to date at the expense of slightly increased loading time." 
+                <TextBlock Text="※ Enabling this option ensures that the saved files are up to date at the expense of speed." 
                            TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
@@ -261,11 +262,11 @@
 
             <!--第三区块-->
             <StackPanel Grid.Row="2">
-                <CheckBox Content="Enable Resource Modding by .hack Rules" 
+                <CheckBox Content="Enable Modding via .hack Rules" 
                           Margin="10,10,0,0" 
                           IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                           IsChecked="{Binding Current.HackEnabled, Mode=TwoWay}"/>
-                <TextBlock Text="※ e.g. If 101r.swf and 101r.hack.swf are both present, the latter is use in preference" 
+                <TextBlock Text="※ e.g. If 101r.swf and 101r.hack.swf are both present, the latter is preferred" 
                            Margin="31,10,0,0" 
                            Style="{StaticResource DetailTextBlock}"/>
                 <Border Style="{StaticResource BorderStyle}" />
@@ -274,16 +275,16 @@
 
             <!--第四区块-->
             <StackPanel Grid.Row="3">
-                <CheckBox Content="Enable Modding of Welcome Messages" 
+            <CheckBox Content="Enable Modding of Welcome Messages" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
                       IsChecked="{Binding Current.HackTitleEnabled, Mode=TwoWay}"/>
             <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ Replaces welcome voice messages in「%CacheFolder%\kcs\sound\titlecall\」"/>
+                <Run Text="※ Allow modding of welcome voice messages in「%CacheFolder%\kcs\sound\titlecall\」"/>
                 <LineBreak/>
-                <Run Text="　  and the server name in「%CacheFolder%\kcs\resources\image\world.png」"/>
+                <Run Text="　 Or replace the server name in「%CacheFolder%\kcs\resources\image\world.png」"/>
             </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -325,13 +326,17 @@
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
                            Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ Each unique character is now identified as a random text string defined in api_start"/>
+                    <Run Text="※ Sprite and voice files for each character is stored using a unique file name"/>
                     <LineBreak/>
-                    <Run Text="　  For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
+                    <Run Text="　 The file names can be found in GraphList.txt"/>
                     <LineBreak/>
-                    <Run Text="　  her sprite file would be「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」,"/>
+                    <Run Text="　 For example，for a ship with the file name 'uuqdlbtrkmvk',"/>
                     <LineBreak/>
-                    <Run Text="　  and her voice files are located under「kcs\sound\kcuuqdlbtrkmvk\」."/>
+                    <Run Text="　 her sprite file would be「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」,"/>
+                    <LineBreak/>
+                    <Run Text="　 and her voice files are located under「kcs\sound\kcuuqdlbtrkmvk\」."/>
+                    <LineBreak/>
+                    <Run Text="　 To generate the current list of sprite files, click the button below:"/>
                 </TextBlock>
                 <Button Margin="30,10,0,0"
                         Padding="10,3"

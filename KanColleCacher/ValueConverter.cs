@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace d_f_32.KanColleCacher
 {
-	#region 保留的代码
+	#region Unused Code
 	//[ValueConversion(typeof(int), typeof(bool?))]
 	//class SwitchCaseConverter : IValueConverter
 	//{

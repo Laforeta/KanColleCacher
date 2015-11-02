@@ -15,13 +15,13 @@ namespace d_f_32.KanColleCacher
 			try
 			{
 				if (!Directory.Exists(value as string))
-					return new ValidationResult(false, "无效的文件夹地址。");
+					return new ValidationResult(false, "Invalid File Path");
 
 				return new ValidationResult(true, null);
 			}
 			catch (Exception)
 			{
-				return new ValidationResult(false, "无效参数");
+				return new ValidationResult(false, "Invalid Parameters");
 			}
 		}
 	}
