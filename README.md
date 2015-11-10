@@ -1,6 +1,7 @@
 ﻿KanColleCacher
 ====================
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0xl2awyagxvgh9a0?svg=true)](https://ci.appveyor.com/project/Laforeta/kancollecacher)
 
 What is this?
 -----------------------
@@ -14,9 +15,9 @@ In addition, this tool can also be used to change the graphics and sound as they
 
 Version Support
 -----------------------
-* The latest test release is v2.1.0
-* Tested to be fully compatible with v3.3 through to v3.6 of the main KCV branch, as well as yuyuvn's KCV v3.7 build r544.
-* Compatibility with future versions of KancolleViewer is not guaranteed as the underlying code base may change. 
+* The latest test release is v2.2.2.38
+* There are currently two branches targeting two major versions of KancolleViewer. A self-contained version for KCV 3.8.x as well as a slightly more complex version for the 4.x branch. 
+* Compatibility with pre-3.8 versions of KCV has been discontinued. If you are still on one of the earlier builds please consider upgrading to at least 3.8.2 which contains important bug fixes. 
 
 
 License
@@ -26,10 +27,7 @@ License
 
 Installation
 --------------------
-* Copy KancolleCacher.dll to the 'Plugins' folder of your KCV installation
-* (Optional but highloy recommended) Right click on KancolleCacher.dll, choose 'Properties', click 'Unblock' and "OK"
-* Launch KanColleViewer
-* The settings for this plugin can be found under the 'Tools' tab
+Please see the release page for more detals. 
 
 Basic Operations
 --------------------
