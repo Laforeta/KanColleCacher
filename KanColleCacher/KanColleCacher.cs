@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using Debug = System.Diagnostics.Debug;
 using File = System.IO.File;
+using System.Windows;
+using System.Windows.Media;
 
 namespace d_f_32.KanColleCacher
 {
@@ -48,9 +50,12 @@ CACHR>	初始化开始：{0}
 
 			//Debug.WriteLine(@"CACHR>	Fiddler初始化开始");
 			FiddlerRules.Initialize();
-			//Debug.WriteLine(@"CACHR>	Fiddler初始化完成");
+            //Debug.WriteLine(@"CACHR>	Fiddler初始化完成");
 
-			//Debug.WriteLine(@"CACHR>	初始化完成");
+            //Debug.WriteLine(@"CACHR>	初始化完成");
+
+            // 解决舰名中文乱码问题
+            Application.Current.Resources["DefaultFontFamilyKey"] = new FontFamily("Microsoft YaHei UI, Microsoft YaHei, SimSun, Meiryo UI, Segoe UI");
 		}
 
 		~KanColleCacher()
