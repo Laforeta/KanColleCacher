@@ -53,9 +53,6 @@ CACHR>	初始化开始：{0}
             //Debug.WriteLine(@"CACHR>	Fiddler初始化完成");
 
             //Debug.WriteLine(@"CACHR>	初始化完成");
-
-            // 解决舰名中文乱码问题
-            Application.Current.Resources["DefaultFontFamilyKey"] = new FontFamily("Microsoft YaHei UI, Microsoft YaHei, SimSun, Meiryo UI, Segoe UI");
 		}
 
 		~KanColleCacher()
