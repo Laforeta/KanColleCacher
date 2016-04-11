@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using Debug = System.Diagnostics.Debug;
 using File = System.IO.File;
+using System.Windows;
+using System.Windows.Media;
 
 namespace d_f_32.KanColleCacher
 {
@@ -48,9 +50,9 @@ CACHR>	初始化开始：{0}
 
 			//Debug.WriteLine(@"CACHR>	Fiddler初始化开始");
 			FiddlerRules.Initialize();
-			//Debug.WriteLine(@"CACHR>	Fiddler初始化完成");
+            //Debug.WriteLine(@"CACHR>	Fiddler初始化完成");
 
-			//Debug.WriteLine(@"CACHR>	初始化完成");
+            //Debug.WriteLine(@"CACHR>	初始化完成");
 		}
 
 		~KanColleCacher()
